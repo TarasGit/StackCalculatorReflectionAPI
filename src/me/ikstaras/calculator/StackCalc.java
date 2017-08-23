@@ -50,14 +50,14 @@ public class StackCalc {
 				break;
 			}
 			
-			processLoop(input);
+			processElements(input);
 			printStack();
 		}
 		
 		sc.close();
 	}
 	
-	public static void processLoop(String input){
+	public static void processElements(String input){
 		
 		if(Pattern.matches("\\d+(\\.\\d+)?", input)){
 			stack.push(Double.parseDouble(input));
@@ -108,8 +108,6 @@ public class StackCalc {
 	}
 	
 	/*
-	 * Changed separator to ";" because two decimals separated by "," 
-	 * are confusig, because of german number format, ex. 2,9999 and 3,9999.
 	 * 
 	 */
 	public static void printStack(){
@@ -118,7 +116,7 @@ public class StackCalc {
 		System.out.print("Stack[");
 		for(Double elem : stack){
 			if(elem % 1 == 0){//no decimal value
-				System.out.print(elem + ";");
+				System.out.print(elem.intValue() + ";");
 			}else{
 				printFormatedDouble(elem);
 				System.out.print(";");
@@ -131,5 +129,9 @@ public class StackCalc {
 	public static void printFormatedDouble(Double d){
 		DecimalFormat f = new DecimalFormat("#0.0000");
 		System.out.print(f.format(d));
+	}
+	
+	public static Double returnResult(){
+		return stack.peek();
 	}
 }
